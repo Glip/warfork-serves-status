@@ -130,7 +130,13 @@ foreach ($results1 as $valu) {
   echo "<div style=\"display: table-row;float:left;margin: 0 15px 15px 0;text-align:center;padding: 10px;width: 250px;\">
   <table style=\"width: 260px;\"><caption>".quakeStyle($valu['gq_hostname'])."</caption>";
   echo "<tr><td>Online</td><td>".$valu['gq_numplayers']."/".$valu['sv_maxclients']."</td></tr>";
-  echo "<tr><td colspan=\"2\" style=\"text-align:center;\">".$valu['mapname']."<br><img style=\"width: 200px;\" src=\"img\warfork\\".$valu['mapname'].".png\"</td></tr>";
+  if (file_exists("img/warfork/".$valu['mapname'].".png")){
+    $mappic = "img\warfork\\".$valu['mapname'].".png";
+  }
+  else{
+    $mappic = "img\warfork\_unknown.jpg";
+  }
+  echo "<tr><td colspan=\"2\" style=\"text-align:center;\">".$valu['mapname']."<br><img style=\"width: 200px;\" src=\"".$mappic."\"</td></tr>";
   echo "</table>";
   echo "<table style=\"width: 260px;\">";
   echo "<tr><td></td><td>Frags</td><td>Name</td><td>Ping</td></tr>";
@@ -139,7 +145,7 @@ foreach ($results1 as $valu) {
   foreach ($adff as $val) {
     echo "<tr><td>".$i++."</td><td>".$val['frags']."</td><td>".quakeStyle($val['name'])."</td><td>".$val['ping']."</td></tr>";
   }
-  echo "<tr><td colspan=\"4\"><a href=\"steam://connect/".$valu['gq_address'].":".$valu['gq_port_client']."\">Подключиться</a></td></tr>";
+  echo "<tr><td colspan=\"4\"><a href=\"steam://connect/".$valu['gq_address'].":".$valu['gq_port_client']."\">Connect</a></td></tr>";
   echo "</table>";
   echo "</div>";
 }
